@@ -75,5 +75,25 @@ namespace MyNetCoreMVC.Controllers
             TempData["message"] = "Delete Success";
             return new RedirectResult("GetList");
         }
+
+        public IActionResult DeleteByArrayId(string ids)
+        {
+            var num = ids.Split(",").Length;
+            foreach (var id in ids.Split(","))
+            {
+                
+                var existProduct = _context.Products.Find(Convert.ToInt32(id));
+                if (existProduct == null)
+                {
+                    TempData["message"] = "Delete Error";
+                }
+                _context.Products.Remove(existProduct ?? throw new InvalidOperationException());
+            }
+            _context.SaveChanges();
+
+            TempData["message"] = "Delete Success";
+
+            return new RedirectResult("GetList");
+        }
     }
 }

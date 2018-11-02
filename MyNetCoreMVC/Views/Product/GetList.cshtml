@@ -5,22 +5,25 @@
 
 <h2>List Product</h2>
 <div class="alert-success">@TempData["message"]</div>
-<table>
+<table class="table-hover">
     <thead>
     <tr>
+        <th><input type="checkbox" id="cb-check-all"/></th>
         <th>Name</th>
         <th>Price</th>
         <th>Handle</th>
     </tr>
     </thead>
-    <tbody>
-        @foreach (var product in Model)
-        {
-            <tr>
-                <td>@product.Name</td>
-                <td>@product.Price</td>
-                <td><a href="/Product/Update?id=@product.Id">Edit</a> | <a href="#" id="@product.Id" class="btnDeleteClick">Delete</a></td>
-            </tr>
-        }
+    <tbody id="list-product">
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td><input type="checkbox" class="check-element" id="check-@product.Id"/></td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+            <td><a href="/Product/Update?id=@product.Id">Edit</a> | <a href="#" id="@product.Id" class="btnDeleteClick">Delete</a></td>
+        </tr>
+    }
     </tbody>
 </table>
+<button id="btn-delete-check">Delete</button>
